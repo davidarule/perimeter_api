@@ -1,0 +1,114 @@
+swagger: "2.0"
+info:
+  title: Insitec Client-Server API
+  version: "1.0.0"
+  description: |
+    Swagger 2.0 specification for the Insitec client-server API, as observed on `POST https://demo020.hexlitix.com/web/insitec`.
+host: demo020.hexlitix.com
+basePath: /web
+schemes:
+  - https
+paths:
+  /insitec:
+    post:
+      summary: Send client device data to server
+      description: Endpoint for client devices to report their data.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      security:
+        - basicAuth: []
+      parameters:
+        - in: body
+          name: body
+          description: Client device data
+          required: true
+          schema:
+            $ref: "#/definitions/InsitecRequest"
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: object
+        401:
+          description: Unauthorized (invalid credentials)
+securityDefinitions:
+  basicAuth:
+    type: basic
+definitions:
+  InsitecRequest:
+    type: object
+    properties:
+      altitude_accuracy_meters:
+        type: number
+        format: float
+        example: 0
+      altitude_meters:
+        type: number
+        format: float
+        example: 0
+      android_id:
+        type: string
+        example: "2277ea3d176c4ed2"
+      build:
+        type: string
+        example: "TWR5.230621.001.R920XXU1BXB7"
+      crypto:
+        type: string
+        example: "N/A"
+      device:
+        type: string
+        example: "CLIENT"
+      device_protocol:
+        type: string
+        example: "insitec"
+      horizontal_accuracy_meters:
+        type: number
+        format: float
+        example: 0
+      location_method:
+        type: string
+        example: "wifi"
+      lon_lat:
+        type: array
+        items:
+          type: number
+        minItems: 2
+        maxItems: 2
+        example: [153.2584329, -27.502645858182525]
+      manufacturer:
+        type: string
+        example: "samsung"
+      model:
+        type: string
+        example: "SM-R920"
+      rssi:
+        type: integer
+        example: -52
+      ssid:
+        type: string
+        example: "\"Easy5\""
+      time:
+        type: string
+        example: "2025-06-12 01:53"
+      version:
+        type: string
+        example: "13"
+    required:
+      - altitude_accuracy_meters
+      - altitude_meters
+      - android_id
+      - build
+      - crypto
+      - device
+      - device_protocol
+      - horizontal_accuracy_meters
+      - location_method
+      - lon_lat
+      - manufacturer
+      - model
+      - rssi
+      - ssid
+      - time
+      - version

@@ -1,0 +1,114 @@
+openapi: 3.0.3
+info:
+  title: Insitec Client-Server API
+  version: "1.0.0"
+  description: |
+    OpenAPI specification for the Insitec client-server API, as observed on `POST https://demo020.hexlitix.com/web/insitec`.
+servers:
+  - url: https://demo020.hexlitix.com/web
+paths:
+  /insitec:
+    post:
+      summary: Send client device data to server
+      description: Endpoint for client devices to report their data.
+      operationId: postInsitec
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InsitecRequest"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Response object (not specified in example)
+        '401':
+          description: Unauthorized (invalid credentials)
+      security:
+        - basicAuth: []
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+  schemas:
+    InsitecRequest:
+      type: object
+      properties:
+        altitude_accuracy_meters:
+          type: number
+          format: float
+          example: 0
+        altitude_meters:
+          type: number
+          format: float
+          example: 0
+        android_id:
+          type: string
+          example: "2277ea3d176c4ed2"
+        build:
+          type: string
+          example: "TWR5.230621.001.R920XXU1BXB7"
+        crypto:
+          type: string
+          example: "N/A"
+        device:
+          type: string
+          example: "CLIENT"
+        device_protocol:
+          type: string
+          example: "insitec"
+        horizontal_accuracy_meters:
+          type: number
+          format: float
+          example: 0
+        location_method:
+          type: string
+          example: "wifi"
+        lon_lat:
+          type: array
+          items:
+            type: number
+          minItems: 2
+          maxItems: 2
+          example: [153.2584329, -27.502645858182525]
+        manufacturer:
+          type: string
+          example: "samsung"
+        model:
+          type: string
+          example: "SM-R920"
+        rssi:
+          type: integer
+          example: -52
+        ssid:
+          type: string
+          example: "\"Easy5\""
+        time:
+          type: string
+          format: date-time
+          example: "2025-06-12 01:53"
+        version:
+          type: string
+          example: "13"
+      required:
+        - altitude_accuracy_meters
+        - altitude_meters
+        - android_id
+        - build
+        - crypto
+        - device
+        - device_protocol
+        - horizontal_accuracy_meters
+        - location_method
+        - lon_lat
+        - manufacturer
+        - model
+        - rssi
+        - ssid
+        - time
+        - version
